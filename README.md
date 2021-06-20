@@ -1,4 +1,4 @@
-## WILDLIFE-TRACKER.
+## Organisational News Portal
 This is an app that enables rangers to track a wild-animal and record status at which the animal is.
 
 ## AUTHOR:
