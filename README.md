@@ -7,18 +7,12 @@ joseph kabue wangari
 
 
 ### PRE-REQUISITES.
+In Postgres SQL:
 
-* Postgresql
-Ensure you have installed postgresql on your localmachine
-
-This will be used as the System 
-
-
-
-.The $ and =# are only used to indicate the current location!
-
-Initialize postgresql Database using this command:
-* $  psql
+CREATE DATABASE news_portal;
+CREATE TABLE departments(id SERIAL PRIMARY KEY,name varchar, description varchar, total_employees int);
+CREATE TABLE employees(id SERIAL PRIMARY KEY, name varchar , role varchar, position varchar, department_id int);
+CREATE TABLE news (id SERIAL PRIMARY KEY,title varchar, content varchar, writtenBy varchar,type varchar,department_id int);
 
 ## Create DataBase:
 CREATE DATABASE wildlife_tracker;
