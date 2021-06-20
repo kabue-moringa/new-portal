@@ -1,5 +1,6 @@
 ## Organisational News Portal
-This is an app that enables rangers to track a wild-animal and record status at which the animal is.
+
+This is an Organisational News API Application that enables a user to View Departments, Employees and News.
 
 ## AUTHOR:
 joseph kabue wangari
