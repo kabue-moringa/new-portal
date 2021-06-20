@@ -6,24 +6,18 @@ joseph kabue wangari
 
 
 
-### PRE-REQUISITES.
+### PRE-REQUISITES & Creating Tables:
 In Postgres SQL:
 
-CREATE DATABASE news_portal;
-CREATE TABLE departments(id SERIAL PRIMARY KEY,name varchar, description varchar, total_employees int);
-CREATE TABLE employees(id SERIAL PRIMARY KEY, name varchar , role varchar, position varchar, department_id int);
-CREATE TABLE news (id SERIAL PRIMARY KEY,title varchar, content varchar, writtenBy varchar,type varchar,department_id int);
+* CREATE DATABASE news_portal;
 
-## Create DataBase:
-CREATE DATABASE wildlife_tracker;
-## Connect to DataBase]
- * \c wildlife_tracker
- 
-## Creating  Tables
+* CREATE TABLE departments(id SERIAL PRIMARY KEY,name varchar, description varchar, total_employees int);
 
-CREATE TABLE animals (id int PRIMARY KEY,name varchar,health varchar, status varchar);
+* CREATE TABLE employees(id SERIAL PRIMARY KEY, name varchar , role varchar, position varchar, department_id int);
 
-CREATE TABLE sightings (id int PRIMARY KEY,location varchar, ranger_name varchar);
+* CREATE TABLE news (id SERIAL PRIMARY KEY,title varchar, content varchar, writtenBy varchar,type varchar,department_id int);
+
+
 
 ### TECHNOLOGIES USED:
 
