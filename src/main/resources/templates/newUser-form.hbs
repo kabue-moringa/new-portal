@@ -2,15 +2,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <a style="color:black;" id="button" href="/generalNews/new" class="btn btn-dark btn-lg" role="button">Post General company news</a><br><br><br>
+                <a style="color:black;" id="button" href="/generalNews/new" class="btn btn-dark btn-lg" role="button">add General company news</a><br><br><br>
             </div>
             <div class="col-md-6">
-                <a style="color:black;" id="button" href="/deptNews/new" class="btn btn-dark btn-lg" role="button">Post Individual department news</a><br><br>
+                <a style="color:black;" id="button" href="/deptNews/new" class="btn btn-dark btn-lg" role="button">add Individual department news</a><br><br>
             </div>
         </div>
     </div>
     <div class="container">
-        <h2 style="text-align:center; margin:3%;"><strong>ALL COMPANY NEWS </strong></h2>
+        <h2 style="text-align:center; margin:3%;"><strong>COMPANY NEWS </strong></h2>
         <div class="row">
             <div class="col-md-6">
                 {{#if generalNews}}
@@ -25,7 +25,7 @@
                         </div>
                     {{/each}}
                 {{else}}
-                <h1>No general news posted yet!</h4>
+                <h1>No general news added yet!</h1>
                 {{/if}}
             </div>
             <div class="col-md-6">
@@ -41,7 +41,7 @@
                         </div>
                     {{/each}}
                 {{else}}
-                    <h1>No department news posted yet!</h1>
+                    <h1>No department news added yet !</h1>
                 {{/if}}
             </div>
         </div>
