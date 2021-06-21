@@ -23,7 +23,7 @@ public class App {
         Connection connection;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:postgresql://localhost:5432/organisational_api";
+        String connectionString = "jdbc:postgresql://localhost:5432/news_portal";
         Sql2o sql2o = new Sql2o(connectionString, "moringa", "Access");
 
         employeeDao = new Sql2oEmployeeDao(sql2o);
@@ -31,9 +31,16 @@ public class App {
         departmentDao = new Sql2oDepartmentDao(sql2o);
         connection= sql2o.open();
 
-        get("/departments", "application/json", (request, response) -> {
+
+        get("/", "application/json", (request, response) -> {
             return gson.toJson(departmentDao.getDepartments());
         });
+        get("/departments", "application/json", (request, response) -> {
+            return gson.toJson(departmentDao.getDepartments());
+
+        });
+
+
         get("departments/:id", "application/json", (request, response) -> {
             int departmentId = Integer.parseInt(request.params("id"));
             Department departmentToFind = departmentDao.findById(departmentId);
