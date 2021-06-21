@@ -1,121 +1,100 @@
+import com.google.gson.Gson;
+import dao.Sql2oDepartmentDao;
+import dao.Sql2oEmployeeDao;
+import dao.Sql2oNewsDao;
+import exceptions.ApiException;
+import models.Department;
+import models.Employee;
+import models.News;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 import static spark.Spark.*;
 
 
 public class App {
-    static int getHerokuAssignedPort() {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        if (processBuilder.environment().get("PORT") != null) {
-            return Integer.parseInt(processBuilder.environment().get("PORT"));
-        }
-        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
-    }
-    public static void main(String[] args) {
+    public static void main(String[] args){
+        Sql2oDepartmentDao departmentDao;
+        Sql2oEmployeeDao employeeDao;
+        Sql2oNewsDao newsDao;
+        Connection connection;
+        Gson gson = new Gson();
 
-        port(getHerokuAssignedPort());
-        staticFileLocation("/public");
-//      Making a home pathway
-//        get("/",(request, response) ->{
-//            Map<String, Object> model = new HashMap<>();
-//            return new ModelAndView(model, "news.hbs");
-//        }, new HandlebarsTemplateEngine() );
-//        create a new user form
-        get("/user/new", (req,res)->{
-            Map<String, Object> model = new HashMap<>();
-            List<Departments> departments = Departments.all();
-            model.put("departments", departments);
-            return new ModelAndView(model, "newUser-form.hbs");
-        }, new HandlebarsTemplateEngine());
-//      post the user entered
-        post("/user/new", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            String fName = request.queryParams("fName");
-            String sName = request.queryParams("sName");
-            String position = request.queryParams("position");
-            String department = request.queryParams("department");
-            Users newUser = new Users(fName,sName,position,department);
-            model.put("user", newUser);
-            newUser.save();
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
-//      show all users in the db
-        get("/allUsers", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Users> users = Users.all();
-            model.put("user", users);
-            return new ModelAndView(model, "allUsers.hbs");
-        }, new HandlebarsTemplateEngine());
-//      show new department form
-        get("/dept/new", (req,res)->{
-            Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "newDept-form.hbs");
-        }, new HandlebarsTemplateEngine());
-//        post the department entered
-        post("/dept/new", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            String dName = request.queryParams("dName");
-            String description = request.queryParams("description");
-            Integer employeeNo = Integer.parseInt(request.queryParams("employeeNo"));
-            Departments newDept = new Departments(dName,description,employeeNo);
-            model.put("department", newDept);
-            newDept.save();
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
-//        show all departments in the db
-        get("/allDepts", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Departments> departments = Departments.all();
-            model.put("departments", departments);
-            return new ModelAndView(model, "allDepts.hbs");
-        }, new HandlebarsTemplateEngine());
-//        form for general news posting
-        get("/generalNews/new", (req,res)->{
-            Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "generalNews-form.hbs");
-        }, new HandlebarsTemplateEngine());
-        post("/generalNews/new", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            String title = request.queryParams("title");
-            String content = request.queryParams("content");
-            String dName = "General News";
-            GeneralNews generalNews = new GeneralNews(title,content,dName);
-            model.put("generalNews", generalNews);
-            generalNews.save();
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
-//        show all news
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<GeneralNews> generalNews = GeneralNews.all();
-            List<DepartmentNews> departmentNews = DepartmentNews.all();
-            model.put("departmentNews", departmentNews);
-            model.put("generalNews", generalNews);
-            return new ModelAndView(model, "news.hbs");
-        }, new HandlebarsTemplateEngine());
-//        show form to enter dept related news.
-        get("/deptNews/new", (req,res)->{
-            Map<String, Object> model = new HashMap<>();
-            List<Departments> departments = Departments.all();
-            model.put("departments", departments);
-            return new ModelAndView(model, "deptNews-form.hbs");
-        }, new HandlebarsTemplateEngine());
-//        post the info got from form and save to db
-        post("/deptNews/new", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            String title = request.queryParams("title");
-            String content = request.queryParams("content");
-            String dName = request.queryParams("dName");
-            DepartmentNews departmentNews = new DepartmentNews(title,content,dName);
-            model.put("departmentNews", departmentNews);
-            departmentNews.save();
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
+        String connectionString = "jdbc:postgresql://localhost:5432/organisational_api";
+        Sql2o sql2o = new Sql2o(connectionString, "moringa", "Access");
+
+        employeeDao = new Sql2oEmployeeDao(sql2o);
+        newsDao = new Sql2oNewsDao(sql2o);
+        departmentDao = new Sql2oDepartmentDao(sql2o);
+        connection= sql2o.open();
+
+        get("/departments", "application/json", (request, response) -> {
+            return gson.toJson(departmentDao.getDepartments());
+        });
+        get("departments/:id", "application/json", (request, response) -> {
+            int departmentId = Integer.parseInt(request.params("id"));
+            Department departmentToFind = departmentDao.findById(departmentId);
+            if (departmentToFind == null) {
+                throw new ApiException(404, String.format("No department with the id:\"%s\" exists", request.queryParams("id")));
+            }
+            return gson.toJson(departmentToFind);
+        });
+
+
+        get ("/employees", "application/json", (request, response) -> {
+            return  gson.toJson(employeeDao.getEmployees());
+        });
+        get("/employees/:id", "application/json", (request, response) -> {
+            response.type("/application/json");
+            int employeeId = Integer.parseInt(request.params("id"));
+            return gson.toJson(departmentDao.findById(employeeId));
+        });
+
+
+        get("/news", "application/json", (request, response) -> {
+            return gson.toJson(newsDao.getNews());
+        });
+        get("/news/:id", "application/json", (request, response) -> {
+            int newsId = Integer.parseInt(request.params("id"));
+            return gson.toJson(newsDao.findById(newsId));
+        });
+
+        post("/departments/new", "application/json", (request, response) -> {
+            Department department = gson.fromJson(request.body(), Department.class);
+            departmentDao.add(department);
+            response.status(201);
+            return gson.toJson(department);
+        });
+        post("/employees/new", "application/json", (request, response) -> {
+            Employee employee = gson.fromJson(request.body(), Employee.class);
+            employeeDao.add(employee);
+            response.status(201);
+            return gson.toJson(employee);
+        });
+        post("/news/new", "application/json",(request, response) -> {
+            News news = gson.fromJson(request.body(),News.class);
+            newsDao.add(news);
+            response.status(201);
+            return  gson.toJson(news);
+        });
+
+        exception(ApiException.class, (exc, req, res) -> {
+            ApiException err = (ApiException) exc;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json");
+            res.status(err.getStatusCode());
+            res.body(gson.toJson(jsonMap));
+        });
+
+        after((req, res) -> {
+            res.type("application/json");
+        });
+
 
     }
 }
