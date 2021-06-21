@@ -1,3 +1,4 @@
+
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.ArrayList;
@@ -19,6 +20,12 @@ public class App {
 
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
+//      Making a home pathway
+//        get("/",(request, response) ->{
+//            Map<String, Object> model = new HashMap<>();
+//            return new ModelAndView(model, "news.hbs");
+//        }, new HandlebarsTemplateEngine() );
+//        create a new user form
         get("/user/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
             List<Departments> departments = Departments.all();
@@ -70,7 +77,7 @@ public class App {
 //        form for general news posting
         get("/generalNews/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "generalNews-form.hbs.hbs");
+            return new ModelAndView(model, "generalNews-form.hbs");
         }, new HandlebarsTemplateEngine());
         post("/generalNews/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
@@ -109,7 +116,6 @@ public class App {
             departmentNews.save();
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
-
 
     }
 }
