@@ -12,7 +12,7 @@ In Postgres SQL:
 
 * CREATE DATABASE news_portal;
 
-* CREATE TABLE departments(id SERIAL PRIMARY KEY,name varchar, description varchar, total_employees int);
+* CREATE TABLE departments(id SERIAL PRIMARY KEY,name varchar, description varchar,employees int);
 
 * CREATE TABLE employees(id SERIAL PRIMARY KEY, name varchar , title varchar, department_id int);
 
