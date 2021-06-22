@@ -3,6 +3,7 @@ package dao;
 import models.Department;
 import models.News;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface DepartmentDao {
@@ -19,4 +20,7 @@ public interface DepartmentDao {
 
     void deleteById(int id);
     void clearAll();
+
+    Collection<Object> getAll();
+
 }

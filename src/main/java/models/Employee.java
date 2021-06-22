@@ -19,6 +19,10 @@ public class Employee {
         this.department_id = department_id;
     }
 
+    public Employee(String sam, String s, String s1, String s2) {
+        return;
+    }
+
     public String getName() {
         return name;
     }

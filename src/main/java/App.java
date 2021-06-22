@@ -9,6 +9,7 @@ import models.News;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +29,16 @@ public class App {
 
         employeeDao = new Sql2oEmployeeDao(sql2o);
         newsDao = new Sql2oNewsDao(sql2o);
-        departmentDao = new Sql2oDepartmentDao(sql2o);
+        departmentDao = new Sql2oDepartmentDao(sql2o) {
+            @Override
+            public Collection<Object> getAll() {
+                return null;
+            }
+        };
         connection= sql2o.open();
 
 
-        get("/", "application/json", (request, response) -> {
+        get("/departments", "application/json", (request, response) -> {
             return gson.toJson(departmentDao.getDepartments());
         });
         get("/departments", "application/json", (request, response) -> {
