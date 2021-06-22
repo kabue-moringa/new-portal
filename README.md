@@ -14,7 +14,7 @@ In Postgres SQL:
 
 * CREATE TABLE departments(id SERIAL PRIMARY KEY,name varchar, description varchar, total_employees int);
 
-* CREATE TABLE employees(id SERIAL PRIMARY KEY, name varchar , role varchar, position varchar, department_id int);
+* CREATE TABLE employees(id SERIAL PRIMARY KEY, name varchar , title varchar, department_id int);
 
 * CREATE TABLE news (id SERIAL PRIMARY KEY,title varchar, details varchar);
 
