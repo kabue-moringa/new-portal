@@ -7,6 +7,8 @@ public class Sql2oDepartmentDaoTest {
 
     @Before
     public void setUp() throws Exception {
+
+
     }
 
     @After
