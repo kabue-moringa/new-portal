@@ -38,7 +38,7 @@ In Postgres SQL:
 
 ## End points
 
-|      | URL                                            | HTTP Verb   |                                 DESCRIPTION|
+|          | URL                                                           | HTTP Verb   |                                              DESCRIPTION|
        |--                                              |  ---        |                                   ---      |
                   
        |/departments                                    |get             |Get departments                       
