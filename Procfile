@@ -1,3 +1,3 @@
-web: ./build/install/portalnews-app/bin/ portalnews-app
+web: ./build/install/portalnews-app/bin/portalnews-app
 
 
