@@ -36,6 +36,24 @@ In Postgres SQL:
 * [Spark]
 * [HTML]
 
+## End points
+
+| URL                                            | HTTP Verb   |                                 DESCRIPTION|
+                                                                                 
+ \|departments  
+   
+ \| employees/:id                                    get  
+                                                     |get          |                                  |\ Get departments                        |
+\|department/:id      
+                                     |             |get depertment using id                |
+\|departments/new                                  |post         |                                   |\ add a new department                   |
+                                  
+\|news/new/department     
+                                                   |post         |                                   |\ add news in department                  |
+|\department/:id                                   |post                                               |\add department and give it an id        |
+
+
+
 
 ### support $ contact:
 * Phone number: (+254713952973)
