@@ -6,6 +6,9 @@ This is an Organisational News API Application that enables a user to View Depar
 joseph kabue wangari
 
 
+### PROJECT DESCRIPTIONS
+A Java/Spark application with a rest REST API for querying and retrieving scoped news and information.
+
 
 ### PRE-REQUISITES & Creating Tables:
 In Postgres SQL:
@@ -18,14 +21,21 @@ In Postgres SQL:
 
 * CREATE TABLE news (id SERIAL PRIMARY KEY,title varchar, details varchar);
 
+### DROPPING TABLES
 
+*  nativage to main/resources/db 
 
+ * `run  psql < drop.sql
+ 
+ 
+ 
 ### TECHNOLOGIES USED:
 
 * [Java ]
 * [Intellij Idea]
 * [Spark]
 * [HTML]
+
 
 ### support $ contact:
 * Phone number: (+254713952973)
