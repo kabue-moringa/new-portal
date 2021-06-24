@@ -45,10 +45,10 @@ In Postgres SQL:
        |/employees                                      |get             |get employees
        |/employees/:id                                  |get             |get employees id          
        |/news                                           |get             |get news       
-       /news/:id                                        |get             |get news using news_id     
+       |/news/:id                                        |get             |get news using news_id     
        |/departments/new                                |post            |add a new department                       
        |/employees/news                                 |post            |add empolyee news                               
-       /news/new                                        |post            |add news
+       |/news/new                                        |post            |add news
         
      
                                                                    
