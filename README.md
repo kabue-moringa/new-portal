@@ -41,27 +41,19 @@ In Postgres SQL:
 |      | URL                                            | HTTP Verb   |                                 DESCRIPTION|
        |--                                              |  ---        |                                   ---      |
                   
-       |/departments                                    |get            | Get departments                        |
-      
-       |/departments/:id                                |get            | get depertments  
-                      
-       |/employees                                       |get            | get employees
-       
-       |/employees/:id                                   |get            | get employees id          |
-        
-       |/news                                             |get           | get news       |
-      
-        /news/:id                                         |get           | get news using news_id     
-     
-        |/departments/new                                 |post           | add a new department                      |
-           |
-       |/employees/news                                    |post         | add empolyee news                               |
- 
-        /news/new                                          |post         |add news
+       |/departments                                    |get             |Get departments                       
+       |/departments/:id                                |get             |get depertments          
+       |/employees                                      |get             |get employees
+       |/employees/:id                                  |get             |get employees id          
+       |/news                                           |get             |get news       
+       /news/:id                                        |get             |get news using news_id     
+       |/departments/new                                |post            |add a new department                       |
+       |/employees/news                                 |post            |add empolyee news                               
+       /news/new                                        |post            |add news
         
      
                                                                    
-                                                                         |
+                                                                         
 
 
 
