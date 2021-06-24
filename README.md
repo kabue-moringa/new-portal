@@ -38,8 +38,7 @@ In Postgres SQL:
 
 ## End points
 
-|          | URL                                                           | HTTP Verb   |                                              DESCRIPTION|
-       |--                                              |  ---        |                                   ---      |
+        |URL                                            |HTTP            |DESCRIPTIONS         
                   
        |/departments                                    |get             |Get departments                       
        |/departments/:id                                |get             |get depertments          
@@ -47,7 +46,7 @@ In Postgres SQL:
        |/employees/:id                                  |get             |get employees id          
        |/news                                           |get             |get news       
        /news/:id                                        |get             |get news using news_id     
-       |/departments/new                                |post            |add a new department                       |
+       |/departments/new                                |post            |add a new department                       
        |/employees/news                                 |post            |add empolyee news                               
        /news/new                                        |post            |add news
         
