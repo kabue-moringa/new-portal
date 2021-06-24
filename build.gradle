@@ -2,10 +2,11 @@ plugins {
     id 'java'
     id 'application'
 }
-
+archivesBaseName = "News_portal"
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+applicationName = "portalnews-app"
 mainClassName = "App"
 repositories {
     mavenCentral()

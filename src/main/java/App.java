@@ -35,8 +35,8 @@ public class App {
         Connection connection;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:postgresql://xczokwsfqtmjgo:79a28119730ba98de5091203d930c71d138d0d0cab197f3335bd01bad4090748@ec2-35-169-188-58.compute-1.amazonaws.com:5432/d628bch6htpntb\n/news_portal";
-        Sql2o sql2o = new Sql2o(connectionString, "xczokwsfqtmjgo", "79a28119730ba98de5091203d930c71d138d0d0cab197f3335bd01bad4090748");
+        String connectionString = "jdbc:postgresql://localhost:5432/news_portal";
+        Sql2o sql2o = new Sql2o(connectionString, "moringa", "Access");
 
         employeeDao = new Sql2oEmployeeDao(sql2o);
         newsDao = new Sql2oNewsDao(sql2o);
